@@ -4,20 +4,23 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.sensedia.poc.message.controller.bean.MessageBean;
-import com.sensedia.poc.message.controller.bean.ResultBean;
+import com.sensedia.poc.message.controller.bean.MessageBodyRequestBean;
+import com.sensedia.poc.message.controller.bean.ResultResponseBean;
 import com.sensedia.poc.message.repository.MessageRepository;
 import com.sensedia.poc.message.repository.model.Message;
 import com.sensedia.poc.message.service.impl.MessageServiceImpl;
 
+@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = {MessageControllerTest.class, MessageServiceImpl.class, MessageController.class})
 public class MessageControllerTest {
 	
@@ -36,33 +39,33 @@ public class MessageControllerTest {
 	public void testGetMessages() {	
 		List<Message> answer = Collections.singletonList(new Message(1, "Hello world"));
 		Mockito.when(messageRepository.findAll()).thenReturn(answer);
-		ResponseEntity<ResultBean> result = messageController.getMessages();
-		Assertions.assertEquals(result.getBody().getResult(), answer);
+		ResponseEntity<ResultResponseBean> result = messageController.getMessages();
+		Assert.assertEquals(result.getBody().getResult(), answer);
 	}
 	
 	@Test
 	public void testGetMessage() {	
 		Message answer = new Message(1, "Hello world");
 		Mockito.when(messageRepository.findById(1)).thenReturn(Optional.of(answer));
-		ResponseEntity<ResultBean> result = messageController.getMessage(1);
-		Assertions.assertEquals(result.getBody().getResult(), answer);
+		ResponseEntity<ResultResponseBean> result = messageController.getMessage(1);
+		Assert.assertEquals(result.getBody().getResult(), answer);
 	}
 
 	@Test
 	public void testPostMessage() {	
 		Message answer = new Message(1, "Hello world");
 		Mockito.when(messageRepository.save(new Message(null, "Hello world"))).thenReturn(answer);
-		ResponseEntity<ResultBean> result = messageController.createMessage(new MessageBean("Hello world"));
-		Assertions.assertEquals(result.getBody().getResult(), answer);
+		ResponseEntity<ResultResponseBean> result = messageController.createMessage(new MessageBodyRequestBean("Hello world"));
+		Assert.assertEquals(result.getBody().getResult(), answer);
 	}
 
 	@Test
 	public void testDeleteMessage() {	
 		Message answer = new Message(1, "Hello world");
 		Mockito.when(messageRepository.findById(1)).thenReturn(Optional.of(answer));		
-		ResponseEntity<ResultBean> result = messageController.deleteMessage(1);
+		ResponseEntity<ResultResponseBean> result = messageController.deleteMessage(1);
 		Mockito.verify(messageRepository, Mockito.atLeastOnce()).delete(answer);
-		Assertions.assertEquals(result.getBody().getResult(), answer);
+		Assert.assertEquals(result.getBody().getResult(), answer);
 	}
 
 }
