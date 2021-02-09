@@ -214,6 +214,7 @@ private MessageService messageService;
 |getMessages|-|ResponseEntity&lt;ResultResponseBean&gt;|@GetMapping("/message")|Obt&eacute;m todas as mensagens cadastradas atrav&eacute;s do endpoint GET /message|
 |getMessage|@PathVariable("id") id: Integer|ResponseEntity&lt;ResultResponseBean&gt;|@GetMapping("/message/{id}")|Obt&eacute;m a mensagem cadastrada atrav&eacute;s do endpoint GET /message/{id}|
 |removeMessage|@PathVariable("id") id: Integer|ResponseEntity&lt;ResultResponseBean&gt;|@DeleteMapping("/message/{id}")|Remove a mensagem cadastrada atrav&eacute;s do endpoint DELETE /message/{id}|
+
 Exemplo:
 ```java
 @PostMapping("/message")
