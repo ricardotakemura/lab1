@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.sensedia.poc.message.controller.bean.ErrorResponseBean;
 import com.sensedia.poc.message.controller.bean.MessageBodyRequestBean;
 import com.sensedia.poc.message.controller.bean.ResultResponseBean;
 import com.sensedia.poc.message.controller.bean.Status;
@@ -27,7 +28,7 @@ public class MessageController {
 			final ResultResponseBean result = new ResultResponseBean(messageService.getMessages(), Status.success);
 			return new ResponseEntity<ResultResponseBean>(result, HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<ResultResponseBean>(new ResultResponseBean("Ocorreu um erro na solicitação", Status.fail), HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<ResultResponseBean>(new ResultResponseBean(new ErrorResponseBean("Ocorreu um erro na solicitação"), Status.fail), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -37,7 +38,7 @@ public class MessageController {
 			final ResultResponseBean result = new ResultResponseBean(messageService.getMessage(id), Status.success);
 			return new ResponseEntity<ResultResponseBean>(result, HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<ResultResponseBean>(new ResultResponseBean("Ocorreu um erro na solicitação", Status.fail), HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<ResultResponseBean>(new ResultResponseBean(new ErrorResponseBean("Ocorreu um erro na solicitação"), Status.fail), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -47,7 +48,7 @@ public class MessageController {
 			final ResultResponseBean result = new ResultResponseBean(messageService.deleteMessage(id), Status.success);
 			return new ResponseEntity<ResultResponseBean>(result, HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<ResultResponseBean>(new ResultResponseBean("Ocorreu um erro na solicitação", Status.fail), HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<ResultResponseBean>(new ResultResponseBean(new ErrorResponseBean("Ocorreu um erro na solicitação"), Status.fail), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -57,7 +58,7 @@ public class MessageController {
 			final ResultResponseBean result = new ResultResponseBean(messageService.createMessage(message.getText()), Status.success);
 			return new ResponseEntity<ResultResponseBean>(result, HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<ResultResponseBean>(new ResultResponseBean("Ocorreu um erro na solicitação", Status.fail), HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<ResultResponseBean>(new ResultResponseBean(new ErrorResponseBean("Ocorreu um erro na solicitação"), Status.fail), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
