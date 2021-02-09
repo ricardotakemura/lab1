@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ricardo.takemura@sensedia.com
+      preConditions:
+        onFail: HALT
+        not:
+          tableExists:
+            tableName: TB_MENSAGEM
+      changes:
+        - createTable:
+            tableName: TB_MENSAGEM
+            columns:
+              - column:
+                  name: ID
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: TEXTO
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+        - addAutoIncrement:
+            tableName: TB_MENSAGEM
+            columnName: ID
+            columnDataType: int
+            incrementBy: 1
