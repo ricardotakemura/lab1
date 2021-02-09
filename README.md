@@ -223,7 +223,7 @@ public ResponseEntity<ResultResponseBean> createMessage(@RequestBody MessageBody
         final ResultResponseBean result = new ResultResponseBean(messageService.createMessage(message.getText()), Status.success);
         return new ResponseEntity<ResultResponseBean>(result, HttpStatus.OK);
     } catch (Exception e) {
-        return new ResponseEntity<ResultResponseBean>(new ResultResponseBean("Ocorreu um erro na solicitação", Status.fail), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<ResultResponseBean>(new ResultResponseBean(new ErrorResponseBean("Ocorreu um erro na solicitação"), Status.fail), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
 ```
