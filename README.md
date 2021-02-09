@@ -88,7 +88,7 @@ private Integer id;
 private String text;
 ```
 - Criar dois construtores, um sem par&acirc;metro, outro passando os valores para todas as propriedades;
-- Adicionar o m&eacute;todo **equals** nesta classe (geralmente, pode ser gerado automaticamente por um IDE):
+- Adicionar o m&eacute;todo **equals** nesta classe (geralmente, pode ser gerado automaticamente por uma IDE):
 ```java
 @Override
 public boolean equals(Object obj) {
@@ -119,12 +119,13 @@ Passo a passo:
 - Estender da interface **JpaRepository**:
 ```java
 //Contem metodos de buscas, exclusoes e salvamentos
+@Repository
 public interface MessageRepository extends org.springframework.data.jpa.repository.JpaRepository<Message,Integer> {
 }
 ```
 - Adicionar a seguinte anota&ccedil;&atilde;o na interface:
 ```java
-//Indica que a classe eh um repositorio para o Spring
+//Indica que a interface eh um repositorio para o Spring
 @Repository
 ```
 
