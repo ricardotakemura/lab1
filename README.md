@@ -201,6 +201,11 @@ private String text;
 ## 10. Criando a classe de controller
 Passo a passo:
 - Criar a classe **MessageController** no pacote **com.sensedia.poc.message.controller**;
+- Colocar a seguinte anotação na classe MessageController:
+```java
+//Indica ao Spring que esta classe eh de controller
+@Controller
+```
 - Adicionar a vari&aacute;vel:
 ```java
 //Indica para o Spring injetar a dependencia
